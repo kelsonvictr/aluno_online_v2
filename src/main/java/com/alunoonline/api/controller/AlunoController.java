@@ -44,5 +44,8 @@ public class AlunoController {
         service.delete(id);
     }
 
-
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Aluno>> findById(@PathVariable String nome) {
+        return ResponseEntity.ok(service.buscarPorNome(nome));
+    }
 }

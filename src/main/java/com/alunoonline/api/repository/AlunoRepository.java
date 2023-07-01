@@ -17,8 +17,8 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     public List<Aluno>
     findAlunoByNomeAndEmail(String nome, String email);
 
-    public List<Aluno> findAllByNomeOrderByNomeAsc(String nome);
+    public List<Aluno> findAllByOrderByNomeAsc();
 
-    @Query("select u from Aluno u where u.nome=:nome")
+    @Query("select a from Aluno a where a.nome=:nome")
     public List<Aluno> buscarPorNome(@Param("nome") String nome);
 }

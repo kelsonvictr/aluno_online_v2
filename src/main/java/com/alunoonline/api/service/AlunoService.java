@@ -31,4 +31,8 @@ public class AlunoService {
         repository.deleteById(id);
     }
 
+    public List<Aluno> buscarPorNome(String nome){
+        return repository.buscarPorNome(nome);
+    }
+
 }
