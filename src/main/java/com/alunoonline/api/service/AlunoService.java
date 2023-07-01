@@ -31,8 +31,12 @@ public class AlunoService {
         repository.deleteById(id);
     }
 
-    public List<Aluno> buscarPorNome(String nome){
+    public List<Aluno> buscarPorNomeIgual(String nome){
         return repository.buscarPorNome(nome);
+    }
+
+    public List<Aluno> buscarPorNomeLike(String nome){
+        return repository.findByNomeContainingIgnoreCase(nome);
     }
 
 }

@@ -45,7 +45,12 @@ public class AlunoController {
     }
 
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<Aluno>> findById(@PathVariable String nome) {
-        return ResponseEntity.ok(service.buscarPorNome(nome));
+    public ResponseEntity<List<Aluno>> buscarPorNomeIgual(@PathVariable String nome) {
+        return ResponseEntity.ok(service.buscarPorNomeIgual(nome));
+    }
+
+    @GetMapping("/nome/like/{nome}")
+    public ResponseEntity<List<Aluno>> buscarPorNomeLike(@PathVariable String nome) {
+        return ResponseEntity.ok(service.buscarPorNomeLike(nome));
     }
 }

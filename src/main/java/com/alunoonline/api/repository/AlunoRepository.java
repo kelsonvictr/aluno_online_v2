@@ -13,6 +13,8 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
     public List<Aluno> findAlunoByNome(String nome);
 
+    public List<Aluno> findByNomeContainingIgnoreCase(String nome);
+
     public Aluno findAlunoByEmail(String email);
     public List<Aluno>
     findAlunoByNomeAndEmail(String nome, String email);
