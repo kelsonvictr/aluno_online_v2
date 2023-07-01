@@ -1,8 +1,12 @@
 package com.alunoonline.api.controller;
 
 import com.alunoonline.api.model.Aluno;
+import com.alunoonline.api.model.dtos.AlunoNomeCursoDTO;
 import com.alunoonline.api.service.AlunoService;
+import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +21,26 @@ public class AlunoController {
     @Autowired
     AlunoService service;
 
+
+    @GetMapping("/curso-nome/{id}")
+    public ResponseEntity<AlunoNomeCursoDTO>
+                          obterNomeCursoAluno(@PathVariable long id){
+        AlunoNomeCursoDTO alunoDTO =
+                new AlunoNomeCursoDTO(service.findById(id).get());
+        return ResponseEntity.ok(alunoDTO);
+    }
+
+    @GetMapping("/lista-paginada")
+    public ResponseEntity<Page<Aluno>> listaAlunosPaginado(
+         @RequestParam(defaultValue = "0")   int page ,
+         @RequestParam(defaultValue = "10")   int size
+    ){
+        return ResponseEntity.ok(service.listarAlunoPaginado(page, size));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Aluno> create(@RequestBody Aluno aluno){
+    public ResponseEntity<Aluno> create(@RequestBody @Valid Aluno aluno){
         Aluno alunoCreated = service.create(aluno);
 
         return ResponseEntity.status(201).body(alunoCreated);
