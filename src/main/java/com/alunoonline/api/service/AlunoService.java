@@ -45,9 +45,9 @@ public class AlunoService {
         return repository.findById(id);
     }
 
-    public AlunoNomeCursoDTO buscarPorId(Long id){
+    public AlunoNomeCursoDTO buscarPorId(Long id) throws Exception {
             AlunoNomeCursoDTO alunoNomeCursoDTO =
-                    modelMapper.map(this.findById(id).get()
+                    modelMapper.map(this.findById(id).orElseThrow()
                             , AlunoNomeCursoDTO.class);
             return alunoNomeCursoDTO;
     }

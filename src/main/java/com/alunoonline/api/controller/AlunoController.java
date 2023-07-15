@@ -25,9 +25,9 @@ public class AlunoController {
     @Autowired
     AlunoService service;
 
-    @GetMapping("/curso-nome/{id}")
+    @GetMapping("/nome-curso/{id}")
     public ResponseEntity<AlunoNomeCursoDTO>
-                          obterNomeCursoAluno(@PathVariable long id){
+                          obterNomeCursoAluno(@PathVariable long id) throws Exception {
 
         AlunoNomeCursoDTO alunoDTO =  service.buscarPorId(id);
         return ResponseEntity.ok(alunoDTO);

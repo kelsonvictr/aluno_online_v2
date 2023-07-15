@@ -7,14 +7,12 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 
-
-
 @Target( { ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = NomeValidator.class)
-public @interface NomeValidation {
-    String message() default "A informação passada para o campo não é aceita ";
+@Constraint(validatedBy = EmailValidator.class)
+public @interface EmailValidation {
+    String message() default "Email não é válido tente fuji.com ";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
