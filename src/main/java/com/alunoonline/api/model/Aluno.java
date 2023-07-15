@@ -26,7 +26,6 @@ public class Aluno implements Serializable {
 
 
     @NotEmpty
-    @NomeValidation
     private String nome;
     @Email
     private String email;

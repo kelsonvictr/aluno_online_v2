@@ -1,6 +1,7 @@
 package com.alunoonline.api.controller;
 
 import com.alunoonline.api.model.Aluno;
+import com.alunoonline.api.model.dtos.AlunoDTO;
 import com.alunoonline.api.model.dtos.AlunoNomeCursoDTO;
 import com.alunoonline.api.service.AlunoService;
 import jakarta.validation.Valid;
@@ -24,17 +25,11 @@ public class AlunoController {
     @Autowired
     AlunoService service;
 
-
-    @Autowired
-    ModelMapper modelMapper;
-
     @GetMapping("/curso-nome/{id}")
     public ResponseEntity<AlunoNomeCursoDTO>
                           obterNomeCursoAluno(@PathVariable long id){
 
-        AlunoNomeCursoDTO alunoDTO =
-                modelMapper.map(service.findById(id).get(), AlunoNomeCursoDTO.class);
-
+        AlunoNomeCursoDTO alunoDTO =  service.buscarPorId(id);
         return ResponseEntity.ok(alunoDTO);
     }
 
@@ -48,8 +43,8 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Aluno> create(@RequestBody @Valid @Validated Aluno aluno){
-        Aluno alunoCreated = service.create(aluno);
+    public ResponseEntity<AlunoDTO> create(@RequestBody @Valid AlunoDTO aluno){
+        AlunoDTO alunoCreated = service.create(aluno);
 
         return ResponseEntity.status(201).body(alunoCreated);
     }
