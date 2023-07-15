@@ -4,11 +4,14 @@ import com.alunoonline.api.model.Aluno;
 import com.alunoonline.api.model.dtos.AlunoNomeCursoDTO;
 import com.alunoonline.api.service.AlunoService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +25,16 @@ public class AlunoController {
     AlunoService service;
 
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @GetMapping("/curso-nome/{id}")
     public ResponseEntity<AlunoNomeCursoDTO>
                           obterNomeCursoAluno(@PathVariable long id){
+
         AlunoNomeCursoDTO alunoDTO =
-                new AlunoNomeCursoDTO(service.findById(id).get());
+                modelMapper.map(service.findById(id).get(), AlunoNomeCursoDTO.class);
+
         return ResponseEntity.ok(alunoDTO);
     }
 
@@ -40,7 +48,7 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Aluno> create(@RequestBody @Valid Aluno aluno){
+    public ResponseEntity<Aluno> create(@RequestBody @Valid @Validated Aluno aluno){
         Aluno alunoCreated = service.create(aluno);
 
         return ResponseEntity.status(201).body(alunoCreated);

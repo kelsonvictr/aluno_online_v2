@@ -3,6 +3,7 @@ package com.alunoonline.api.service;
 import com.alunoonline.api.model.Disciplina;
 import com.alunoonline.api.repository.DisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,4 +21,11 @@ public class DisciplinaService {
     public List<Disciplina> findByProfessorId(Long professorId) {
         return repository.findByProfessorId(professorId);
     }
+
+
+    @Cacheable("disciplinas")
+    public List<Disciplina> listarDisciplinas(){
+        return repository.findAll();
+    }
+
 }

@@ -3,6 +3,7 @@ package com.alunoonline.api.service;
 import com.alunoonline.api.model.Aluno;
 import com.alunoonline.api.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,7 @@ public class AlunoService {
     public List<Aluno> findAll() {
         return repository.findAll();
     }
+
 
     public Optional<Aluno> findById(Long id) {
         return repository.findById(id);
