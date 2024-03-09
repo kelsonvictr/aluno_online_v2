@@ -6,7 +6,6 @@ import com.alunoonline.api.model.dtos.AlunoNomeCursoDTO;
 import com.alunoonline.api.repository.AlunoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +44,7 @@ public class AlunoService {
         return repository.findById(id);
     }
 
-    public AlunoNomeCursoDTO buscarPorId(Long id) throws Exception {
+    public AlunoNomeCursoDTO buscarPorId(Long id)  {
             AlunoNomeCursoDTO alunoNomeCursoDTO =
                     modelMapper.map(this.findById(id).orElseThrow()
                             , AlunoNomeCursoDTO.class);
